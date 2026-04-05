@@ -49,7 +49,7 @@ const Hero = () => {
             </Link>
             
             <Link 
-              href="/collections"
+              href="/catalog"
               className="group flex items-center text-[10px] uppercase tracking-[0.4em] text-cream hover:text-gold transition-all duration-300 border-b border-cream/20 pb-1"
             >
               Коллекции <ArrowRight size={14} className="ml-2 group-hover:translate-x-1 transition-transform" />

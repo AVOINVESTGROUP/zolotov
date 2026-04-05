@@ -9,6 +9,10 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
+        hostname: "api.zolotov.store",
+      },
+      {
+        protocol: "https",
         hostname: "zolotov.store",
       },
     ],

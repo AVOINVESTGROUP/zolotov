@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useMiniAppI18n } from './i18n/context';
-import { getProducts } from '@/lib/woo';
+import axios from 'axios';
 import { Product } from '@/types';
 import { ShoppingBag, ChevronRight } from 'lucide-react';
 
@@ -16,10 +16,16 @@ export default function MiniAppHome() {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      // Передаем locale в API если в WC настроен мульти-язык
-      const data = await getProducts({ per_page: 4 });
-      setProducts(data);
-      setLoading(false);
+      try {
+        const response = await axios.get('/api/products', {
+          params: { per_page: 4 }
+        });
+        setProducts(response.data);
+      } catch (error) {
+        console.error('Failed to fetch products via Proxy:', error);
+      } finally {
+        setLoading(false);
+      }
     };
     fetchProducts();
   }, [locale]);

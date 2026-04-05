@@ -60,7 +60,7 @@ C:\Dev\Zolotov\
 │   ├── [category]/page.tsx     # Категорийные страницы
 │   └── api/
 │       ├── products/route.ts   # Проксирование WC API (скрываем ключи)
-│       └── orders/route.ts
+│       └── checkout/route.ts   # Создание заказа через прокси
 │
 ├── components/
 │   ├── layout/
@@ -183,14 +183,15 @@ POST /customers                 # создать покупателя
 - [x] Архитектура определена
 - [x] WordPress настроен
 - [x] Next.js проект создан и инициализирован
-- [ ] Деплой на Vercel
+- [x] Деплой на Vercel
 - [x] Дизайн-система и шрифты (v4 @theme)
 - [x] Базовый Layout
-- [ ] Главная страница
-- [ ] Каталог
-- [ ] Карточка товара
-- [ ] КОРЗИНА (Backend готов, Frontend в процессе)
-- [ ] Checkout
+- [x] Главная страница
+- [x] Каталог
+- [x] Карточка товара
+- [x] КОРЗИНА (Zustand + Mini App)
+- [x] Checkout (Proxy API)
+- [x] Telegram Mini App (RU/EN)
 
 ## Важные решения
 
@@ -201,3 +202,4 @@ POST /customers                 # создать покупателя
 | Zustand + persist | Лёгкая корзина, сохраняется в localStorage |
 | Framer Motion | Плавные анимации уровня люкс-сайта |
 | Cormorant Garamond | Ювелирный характер, как у образца |
+| Webpack для шрифтов | Обход багов Turbopack в Next.js 16 (Module not found) |

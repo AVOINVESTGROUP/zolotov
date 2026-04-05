@@ -3,7 +3,7 @@
 import React, { useEffect, useState, use } from 'react';
 import Image from 'next/image';
 import { useMiniAppI18n } from '../../i18n/context';
-import { getProductBySlug } from '@/lib/woo';
+import axios from 'axios';
 import { Product } from '@/types';
 import { useTWA } from '@/components/miniapp/TWAProvider';
 import { useCart } from '@/store/cart';
@@ -19,9 +19,14 @@ export default function MiniAppProductPage({ params }: { params: Promise<{ slug:
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const data = await getProductBySlug(slug);
-      setProduct(data);
-      setLoading(false);
+      try {
+        const response = await axios.get(`/api/products/${slug}`);
+        setProduct(response.data);
+      } catch (error) {
+        console.error('Failed to fetch product via Proxy:', error);
+      } finally {
+        setLoading(false);
+      }
     };
     fetchProduct();
   }, [slug]);

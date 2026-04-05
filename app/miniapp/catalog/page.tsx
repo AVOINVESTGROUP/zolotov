@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useMiniAppI18n } from '../i18n/context';
-import { getProducts, getCategories } from '@/lib/woo';
+import axios from 'axios';
 import { Product, Category } from '@/types';
 import { useTWA } from '@/components/miniapp/TWAProvider';
 
@@ -32,16 +32,23 @@ export default function MiniAppCatalog() {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const [productsData, categoriesData] = await Promise.all([
-        getProducts({ 
-          category: selectedCategory || undefined,
-          per_page: 20 
-        }),
-        getCategories()
-      ]);
-      setProducts(productsData);
-      setCategories(categoriesData);
-      setLoading(false);
+      try {
+        const [productsRes, categoriesRes] = await Promise.all([
+          axios.get('/api/products', {
+            params: { 
+              category: selectedCategory || undefined,
+              per_page: 20 
+            }
+          }),
+          axios.get('/api/categories')
+        ]);
+        setProducts(productsRes.data);
+        setCategories(categoriesRes.data);
+      } catch (error) {
+        console.error('Failed to fetch catalog via Proxy:', error);
+      } finally {
+        setLoading(false);
+      }
     };
     fetchData();
   }, [selectedCategory]);
