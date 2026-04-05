@@ -28,17 +28,20 @@ const ProductCard = ({ product, className }: ProductCardProps) => {
       className={cn("group flex flex-col", className)}
     >
       {/* Image Container */}
-      <Link href={`/catalog/${product.slug}`} className="relative aspect-[3/4] overflow-hidden bg-secondary mb-6">
-        <Image
-          src={mainImage}
-          alt={product.name}
-          fill
-          className="object-cover transition-transform duration-1000 group-hover:scale-110"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-        />
+      {/* Image Container */}
+      <div className="relative aspect-[3/4] overflow-hidden bg-secondary mb-6">
+        <Link href={`/catalog/${product.slug}`} className="block w-full h-full">
+          <Image
+            src={mainImage}
+            alt={product.name}
+            fill
+            className="object-cover transition-transform duration-1000 group-hover:scale-110"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+          />
+        </Link>
         
         {/* Hover Overlay */}
-        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center gap-4">
+        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center gap-4 pointer-events-none group-hover:pointer-events-auto">
           <button 
             onClick={(e) => {
               e.preventDefault();
@@ -49,9 +52,12 @@ const ProductCard = ({ product, className }: ProductCardProps) => {
             <ShoppingCart size={18} strokeWidth={1.5} />
           </button>
           
-          <button className="p-3 bg-white text-black rounded-full hover:bg-gold transition-colors transform translate-y-4 group-hover:translate-y-0 duration-500 delay-75">
+          <Link 
+            href={`/catalog/${product.slug}`}
+            className="p-3 bg-white text-black rounded-full hover:bg-gold transition-colors transform translate-y-4 group-hover:translate-y-0 duration-500 delay-75"
+          >
             <Eye size={18} strokeWidth={1.5} />
-          </button>
+          </Link>
         </div>
 
         {/* Badges */}
@@ -60,7 +66,7 @@ const ProductCard = ({ product, className }: ProductCardProps) => {
             Sale
           </span>
         )}
-      </Link>
+      </div>
 
       {/* Info */}
       <div className="flex flex-col items-center text-center">

@@ -7,15 +7,16 @@ import { getProducts, getCategories } from '@/lib/woo';
 import { cn } from '@/lib/utils';
 
 interface CatalogPageProps {
-  searchParams: {
+  searchParams: Promise<{
     category?: string;
     page?: string;
-  };
+  }>;
 }
 
 export default async function CatalogPage({ searchParams }: CatalogPageProps) {
-  const currentCategorySlug = searchParams.category;
-  const currentPage = parseInt(searchParams.page || '1');
+  const resolvedParams = await searchParams;
+  const currentCategorySlug = resolvedParams.category;
+  const currentPage = parseInt(resolvedParams.page || '1');
   const perPage = 12;
 
   // 1. Получаем категории для фильтра
