@@ -21,10 +21,10 @@ const Header = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Магазин', href: '/catalog' },
-    { name: 'Платина 950', href: '/catalog/platinum' },
-    { name: 'Коллекции', href: '/collections' },
-    { name: 'О нас', href: '/about' },
+    { name: 'Каталог', href: '/catalog' },
+    { name: 'Кольца', href: '/catalog?category=rings' },
+    { name: 'Серьги', href: '/catalog?category=earrings' },
+    { name: 'О бренде', href: '/about' },
   ];
 
   return (
