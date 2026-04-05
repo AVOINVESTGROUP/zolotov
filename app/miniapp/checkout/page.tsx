@@ -109,7 +109,9 @@ export default function MiniAppCheckout() {
       tg.MainButton.show();
       tg.MainButton.onClick(handleSubmit);
     }
-    return () => tg?.MainButton.hide();
+    return () => {
+       tg?.MainButton.hide();
+    };
   }, [tg, formData, items]);
 
   return (

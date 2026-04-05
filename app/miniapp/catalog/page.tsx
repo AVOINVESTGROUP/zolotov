@@ -24,7 +24,9 @@ export default function MiniAppCatalog() {
           window.location.href = '/miniapp';
       });
     }
-    return () => tg?.BackButton.hide();
+    return () => {
+      tg?.BackButton.hide();
+    };
   }, [tg]);
 
   useEffect(() => {
