@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShoppingBag, Search, Menu, X } from 'lucide-react';
+import Image from 'next/image';
 import { useCart } from '@/store/cart';
 import { cn } from '@/lib/utils';
 
@@ -45,9 +46,15 @@ const Header = () => {
 
         {/* Logo */}
         <Link href="/" className="group flex flex-col items-center">
-          <h1 className="text-xl md:text-2xl font-serif tracking-[0.4em] uppercase text-cream group-hover:text-gold transition-all duration-700">
-            Zolotov
-          </h1>
+          <div className="relative w-[150px] h-[40px] md:w-[180px] md:h-[50px] transition-transform duration-700 group-hover:scale-105">
+            <Image
+              src="/logo.png"
+              alt="Zolotov"
+              fill
+              className="object-contain brightness-0 invert"
+              priority
+            />
+          </div>
           <span className="text-[7px] tracking-[0.6em] uppercase text-gold/60 mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
             Dubai · Platinum · Diamonds
           </span>
