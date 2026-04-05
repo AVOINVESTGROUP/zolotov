@@ -64,4 +64,21 @@ export async function getCategories(params: Record<string, any> = {}) {
   }
 }
 
+/**
+ * Создать заказ в WooCommerce.
+ */
+export async function createOrder(data: any) {
+  try {
+    const response = await wooClient.post('/orders', data);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error('WooCommerce Order Error:', error.response?.data || error.message);
+    } else {
+      console.error('Unknown Order Error:', error);
+    }
+    throw error;
+  }
+}
+
 export default wooClient;
