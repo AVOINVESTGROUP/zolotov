@@ -50,7 +50,7 @@ export default function MiniAppCart() {
         {items.map((item) => (
           <div key={item.id} className="flex space-x-4 bg-secondary/10 p-3 rounded-2xl border border-white/5">
             <div className="w-20 h-20 relative rounded-xl overflow-hidden flex-shrink-0">
-               <Image src={item.images[0]?.src} alt={item.name} fill className="object-cover" />
+               <Image src={item.image} alt={item.name} fill className="object-cover" />
             </div>
             <div className="flex-1 flex flex-col justify-between min-w-0">
                <div>
