@@ -29,8 +29,8 @@ export default function MiniAppCheckout() {
       if (tg.initDataUnsafe?.user) {
         setFormData(prev => ({
           ...prev,
-          firstName: tg.initDataUnsafe.user.first_name || '',
-          lastName: tg.initDataUnsafe.user.last_name || ''
+          firstName: tg.initDataUnsafe.user?.first_name || '',
+          lastName: tg.initDataUnsafe.user?.last_name || ''
         }));
       }
     }
