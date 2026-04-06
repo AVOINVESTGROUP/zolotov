@@ -3,9 +3,8 @@ import { Cormorant_Garamond, Montserrat } from "next/font/google";
 import "@/app/globals.css";
 import { TWAProvider } from "@/components/miniapp/TWAProvider";
 import { MiniAppI18nProvider } from "./i18n/context";
-import { MiniAppHeader } from "@/components/miniapp/MiniAppHeader";
-import { MiniAppMenu } from "@/components/miniapp/MiniAppMenu";
-import React, { useState } from 'react';
+import { MiniAppNavigation } from "@/components/miniapp/MiniAppNavigation";
+import React from 'react';
 
 const cormorantGaramond = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -29,14 +28,11 @@ export default function MiniAppLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   return (
     <div className={`${cormorantGaramond.variable} ${montserrat.variable} bg-black font-sans text-cream min-h-screen relative`}>
       <TWAProvider>
         <MiniAppI18nProvider>
-          <MiniAppHeader onMenuClick={() => setIsMenuOpen(true)} />
-          <MiniAppMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+          <MiniAppNavigation />
           <main>
             {children}
           </main>
