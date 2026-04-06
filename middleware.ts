@@ -11,6 +11,6 @@ export default createMiddleware({
 });
 
 export const config = {
-  // Пропускаем статику, API и некстовские запросы
-  matcher: ['/((?!api|_next|.*\\..*).*)']
+  // Пропускаем статику, API, miniapp и некстовские запросы
+  matcher: ['/((?!api|_next|miniapp|.*\\..*).*)']
 };
