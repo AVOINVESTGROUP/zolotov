@@ -192,6 +192,7 @@ POST /customers                 # создать покупателя
 - [x] КОРЗИНА (Zustand + Mini App)
 - [x] Checkout (Proxy API)
 - [x] Telegram Mini App (RU/EN)
+- [x] Полная интернационализация сайта (i18n)
 
 ## Важные решения
 

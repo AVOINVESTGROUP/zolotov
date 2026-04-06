@@ -4,8 +4,12 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import { useTranslations, useLocale } from 'next-intl';
 
 const Hero = () => {
+  const t = useTranslations('hero');
+  const locale = useLocale();
+
   return (
     <section className="relative h-[95vh] w-full flex items-center justify-center overflow-hidden bg-black">
       {/* Background Image/Overlay */}
@@ -32,27 +36,29 @@ const Hero = () => {
           </span>
           
           <h1 className="text-4xl md:text-7xl lg:text-8xl font-serif text-cream leading-[1.1] mb-8 tracking-tight-lux">
-            Platinum 950 <br />
-            <span className="italic">& Diamonds</span>
+            {t('title').split('&')[0]} <br />
+            <span className="italic">& {t('title').split('&')[1]}</span>
           </h1>
           
           <p className="text-sm md:text-base text-cream/60 max-w-xl mx-auto mb-10 leading-relaxed font-sans font-light tracking-wide">
-            Discover a unique collection inspired by modern architecture and eternal craftsmanship. Crafted in the heart of Dubai.
+            {t('subtitle')} · {t('location')}
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
             <Link 
-              href="/catalog"
+              href={`/${locale}/catalog`}
               className="group relative px-10 py-4 bg-cream text-black text-[10px] uppercase tracking-[0.3em] hover:bg-gold transition-all duration-500 overflow-hidden"
             >
-              <span className="relative z-10">Перейти в магазин</span>
+              <span className="relative z-10">{t('cta')}</span>
             </Link>
             
             <Link 
-              href="/catalog"
+              href={`/${locale}/catalog`}
               className="group flex items-center text-[10px] uppercase tracking-[0.4em] text-cream hover:text-gold transition-all duration-300 border-b border-cream/20 pb-1"
             >
-              Коллекции <ArrowRight size={14} className="ml-2 group-hover:translate-x-1 transition-transform" />
+              {t.rich('explore', {
+                fallback: locale === 'ru' ? 'Каталог' : 'Collection'
+              })} <ArrowRight size={14} className="ml-2 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
         </motion.div>

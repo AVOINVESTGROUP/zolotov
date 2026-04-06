@@ -6,6 +6,7 @@ import Hero from '@/components/sections/Hero';
 import ProductCard from '@/components/product/ProductCard';
 import { getProducts } from '@/lib/woo';
 import { Product } from '@/types';
+import { getTranslations } from 'next-intl/server';
 
 // Mock data in case API returns empty results during dev
 const MOCK_PRODUCTS: Product[] = [
@@ -59,12 +60,20 @@ const MOCK_PRODUCTS: Product[] = [
   }
 ];
 
-export default async function Home() {
+export default async function Home({
+  params
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations('catalog');
+  const tTrust = await getTranslations('trust');
+  
   const products = await getProducts({ per_page: 8 });
   const displayProducts = products.length > 0 ? products : MOCK_PRODUCTS;
 
   return (
-    <main className="min-h-screen bg-black">
+    <main className="min-h-screen bg-black text-cream">
       <Header />
       <Hero />
       
@@ -72,10 +81,10 @@ export default async function Home() {
       <section className="py-24 px-6 max-w-7xl mx-auto">
         <header className="text-center mb-16">
           <span className="text-[10px] uppercase tracking-[0.4em] text-gold mb-3 block font-accent">
-            Новые поступления
+            {locale === 'ru' ? 'Новые поступления' : 'Latest Arrivals'}
           </span>
           <h2 className="text-4xl font-serif text-cream uppercase tracking-lux">
-            The Collection
+            {t('title')}
           </h2>
         </header>
 
@@ -89,28 +98,28 @@ export default async function Home() {
         {/* View All Button */}
         <div className="mt-20 text-center">
             <Link 
-              href="/catalog"
+              href={`/${locale}/catalog`}
               className="inline-block px-12 py-4 border border-cream/10 text-cream text-[10px] uppercase tracking-[0.4em] hover:bg-cream hover:text-black transition-all duration-500"
             >
-              Смотреть всё
+              {t('all')}
             </Link>
         </div>
       </section>
 
-      {/* Trust Block (Style of jewelrymuse.ru) */}
+      {/* Trust Block */}
       <section className="py-24 bg-secondary border-y border-white/5">
         <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
           <div>
-            <h4 className="text-xs uppercase tracking-lux text-gold mb-4 font-accent">Бесплатная доставка</h4>
-            <p className="text-[9px] text-cream/40 leading-relaxed uppercase tracking-widest font-sans">По всему миру для заказов от 50,000 AED</p>
+            <h4 className="text-xs uppercase tracking-lux text-gold mb-4 font-accent">{tTrust('shipping.title')}</h4>
+            <p className="text-[9px] text-cream/40 leading-relaxed uppercase tracking-widest font-sans">{tTrust('shipping.desc')}</p>
           </div>
           <div>
-            <h4 className="text-xs uppercase tracking-lux text-gold mb-4 font-accent">Гарантия качества</h4>
-            <p className="text-[9px] text-cream/40 leading-relaxed uppercase tracking-widest font-sans">Международные сертификаты GIA и IGI</p>
+            <h4 className="text-xs uppercase tracking-lux text-gold mb-4 font-accent">{tTrust('quality.title')}</h4>
+            <p className="text-[9px] text-cream/40 leading-relaxed uppercase tracking-widest font-sans">{tTrust('quality.desc')}</p>
           </div>
           <div>
-            <h4 className="text-xs uppercase tracking-lux text-gold mb-4 font-accent">Приватный сервис</h4>
-            <p className="text-[9px] text-cream/40 leading-relaxed uppercase tracking-widest font-sans">Индивидуальный консьерж для каждого клиента</p>
+            <h4 className="text-xs uppercase tracking-lux text-gold mb-4 font-accent">{tTrust('service.title')}</h4>
+            <p className="text-[9px] text-cream/40 leading-relaxed uppercase tracking-widest font-sans">{tTrust('service.desc')}</p>
           </div>
         </div>
       </section>

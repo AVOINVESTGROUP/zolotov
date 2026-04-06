@@ -24,6 +24,9 @@ const translations = {
     'success.title': 'Заказ оформлен!',
     'common.back': 'Назад',
     'common.aed': 'AED',
+    'miniapp.home': 'Главная',
+    'miniapp.menu': 'Меню',
+    'nav.about': 'О бренде',
   },
   en: {
     'hero.title': 'Zolotov Luxury',
@@ -38,6 +41,9 @@ const translations = {
     'success.title': 'Order Placed!',
     'common.back': 'Back',
     'common.aed': 'AED',
+    'miniapp.home': 'Home',
+    'miniapp.menu': 'Menu',
+    'nav.about': 'House Heritage',
   }
 };
 

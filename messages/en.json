@@ -1,0 +1,54 @@
+{
+  "common": {
+    "back": "Back",
+    "aed": "AED",
+    "buy": "Buy Now",
+    "loading": "Loading...",
+    "error": "Loading error"
+  },
+  "nav": {
+    "catalog": "Collection",
+    "rings": "Rings",
+    "earrings": "Earrings",
+    "about": "House Heritage",
+    "cart": "Boutique Bag"
+  },
+  "hero": {
+    "title": "Platinum 950 & Diamonds",
+    "subtitle": "Exclusive High Jewelry House",
+    "location": "Dubai · International Delivery",
+    "cta": "Explore Collection"
+  },
+  "catalog": {
+    "title": "Heritage Collection",
+    "filters": "Refine",
+    "all": "All Masterpieces",
+    "empty": "No items found",
+    "sale": "Sale"
+  },
+  "cart": {
+    "title": "Your Boutique Bag",
+    "empty": "Your bag is empty",
+    "checkout": "Proceed to Checkout",
+    "total": "Total Value"
+  },
+  "trust": {
+    "shipping": {
+      "title": "Complimentary Delivery",
+      "desc": "World-wide shipping for orders over 50,000 AED"
+    },
+    "quality": {
+      "title": "Quality Assurance",
+      "desc": "GIA and IGI International Certificates"
+    },
+    "service": {
+      "title": "Private Concierge",
+      "desc": "Personal assistance for every distinguished client"
+    }
+  },
+  "miniapp": {
+    "menu": "Menu",
+    "language": "Lang",
+    "home": "Home"
+  }
+}

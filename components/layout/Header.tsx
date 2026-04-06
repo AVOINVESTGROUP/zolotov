@@ -3,15 +3,29 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShoppingBag, Search, Menu, X } from 'lucide-react';
+import { ShoppingBag, Search, Menu, X, Globe } from 'lucide-react';
 import Image from 'next/image';
 import { useCart } from '@/store/cart';
 import { cn } from '@/lib/utils';
+import { useTranslations, useLocale } from 'next-intl';
+import { usePathname, useRouter } from 'next/navigation';
 
 const Header = () => {
+  const t = useTranslations('nav');
+  const locale = useLocale();
+  const pathname = usePathname();
+  const router = useRouter();
+  
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const totalItems = useCart((state) => state.totalItems());
+
+  const toggleLocale = () => {
+    const nextLocale = locale === 'ru' ? 'en' : 'ru';
+    // Заменяем текущую локаль в пути
+    const newPath = pathname.replace(`/${locale}`, `/${nextLocale}`);
+    router.push(newPath);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,10 +36,10 @@ const Header = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Каталог', href: '/catalog' },
-    { name: 'Кольца', href: '/catalog?category=rings' },
-    { name: 'Серьги', href: '/catalog?category=earrings' },
-    { name: 'О бренде', href: '/about' },
+    { name: t('catalog'), href: `/${locale}/catalog` },
+    { name: t('rings'), href: `/${locale}/catalog?category=rings` },
+    { name: t('earrings'), href: `/${locale}/catalog?category=earrings` },
+    { name: t('about'), href: `/${locale}/about` },
   ];
 
   return (
@@ -45,7 +59,7 @@ const Header = () => {
         </button>
 
         {/* Logo */}
-        <Link href="/" className="group flex flex-col items-center">
+        <Link href={`/${locale}`} className="group flex flex-col items-center">
           <div className="relative w-[150px] h-[40px] md:w-[180px] md:h-[50px] transition-transform duration-700 group-hover:scale-105">
             <Image
               src="/logo.png"
@@ -75,11 +89,21 @@ const Header = () => {
 
         {/* Icons */}
         <div className="flex items-center space-x-6">
+          {/* Language Switcher */}
+          <button 
+            onClick={toggleLocale}
+            className="flex items-center space-x-2 text-[10px] uppercase tracking-widest text-cream/60 hover:text-gold transition-colors"
+            title={locale === 'ru' ? 'Switch to English' : 'Переключить на русский'}
+          >
+            <Globe size={16} strokeWidth={1} className="text-gold/50" />
+            <span className="w-4 font-accent">{locale === 'ru' ? 'EN' : 'RU'}</span>
+          </button>
+
           <button className="text-cream/80 hover:text-gold transition-colors hidden sm:block">
             <Search size={18} strokeWidth={1.2} />
           </button>
           
-          <Link href="/cart" className="relative text-cream/80 hover:text-gold transition-colors">
+          <Link href={`/${locale}/cart`} className="relative text-cream/80 hover:text-gold transition-colors">
             <ShoppingBag size={20} strokeWidth={1.2} />
             {totalItems > 0 && (
               <span className="absolute -top-1 -right-2 bg-wine text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center animate-fade-in border border-black/20">
